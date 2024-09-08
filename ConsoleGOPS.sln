@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33530.505
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleGOPS", "ConsoleGOPS\ConsoleGOPS.csproj", "{292B6E74-E7B2-47A6-B299-F01A7BDC6489}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{292B6E74-E7B2-47A6-B299-F01A7BDC6489}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{292B6E74-E7B2-47A6-B299-F01A7BDC6489}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{292B6E74-E7B2-47A6-B299-F01A7BDC6489}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{292B6E74-E7B2-47A6-B299-F01A7BDC6489}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F9757118-6870-4E2E-8F16-7479D8D19969}
+	EndGlobalSection
+EndGlobal

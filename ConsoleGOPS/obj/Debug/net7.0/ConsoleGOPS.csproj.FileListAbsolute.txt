@@ -1,0 +1,14 @@
+D:\ConsoleGOPS\ConsoleGOPS\bin\Debug\net7.0\ConsoleGOPS.exe
+D:\ConsoleGOPS\ConsoleGOPS\bin\Debug\net7.0\ConsoleGOPS.deps.json
+D:\ConsoleGOPS\ConsoleGOPS\bin\Debug\net7.0\ConsoleGOPS.runtimeconfig.json
+D:\ConsoleGOPS\ConsoleGOPS\bin\Debug\net7.0\ConsoleGOPS.dll
+D:\ConsoleGOPS\ConsoleGOPS\bin\Debug\net7.0\ConsoleGOPS.pdb
+D:\ConsoleGOPS\ConsoleGOPS\obj\Debug\net7.0\ConsoleGOPS.GeneratedMSBuildEditorConfig.editorconfig
+D:\ConsoleGOPS\ConsoleGOPS\obj\Debug\net7.0\ConsoleGOPS.AssemblyInfoInputs.cache
+D:\ConsoleGOPS\ConsoleGOPS\obj\Debug\net7.0\ConsoleGOPS.AssemblyInfo.cs
+D:\ConsoleGOPS\ConsoleGOPS\obj\Debug\net7.0\ConsoleGOPS.csproj.CoreCompileInputs.cache
+D:\ConsoleGOPS\ConsoleGOPS\obj\Debug\net7.0\ConsoleGOPS.dll
+D:\ConsoleGOPS\ConsoleGOPS\obj\Debug\net7.0\refint\ConsoleGOPS.dll
+D:\ConsoleGOPS\ConsoleGOPS\obj\Debug\net7.0\ConsoleGOPS.pdb
+D:\ConsoleGOPS\ConsoleGOPS\obj\Debug\net7.0\ConsoleGOPS.genruntimeconfig.cache
+D:\ConsoleGOPS\ConsoleGOPS\obj\Debug\net7.0\ref\ConsoleGOPS.dll
