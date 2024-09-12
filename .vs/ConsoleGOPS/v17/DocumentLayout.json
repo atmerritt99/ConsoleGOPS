@@ -1,18 +1,18 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "D:\\ConsoleGOPS\\",
+  "WorkspaceRootPath": "D:\\source\\ConsoleGOPS\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{292B6E74-E7B2-47A6-B299-F01A7BDC6489}|ConsoleGOPS\\ConsoleGOPS.csproj|d:\\consolegops\\consolegops\\population.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{292B6E74-E7B2-47A6-B299-F01A7BDC6489}|ConsoleGOPS\\ConsoleGOPS.csproj|solutionrelative:consolegops\\population.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{292B6E74-E7B2-47A6-B299-F01A7BDC6489}|ConsoleGOPS\\ConsoleGOPS.csproj|d:\\source\\consolegops\\consolegops\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{292B6E74-E7B2-47A6-B299-F01A7BDC6489}|ConsoleGOPS\\ConsoleGOPS.csproj|solutionrelative:consolegops\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{292B6E74-E7B2-47A6-B299-F01A7BDC6489}|ConsoleGOPS\\ConsoleGOPS.csproj|d:\\consolegops\\consolegops\\mlpaiplayer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{292B6E74-E7B2-47A6-B299-F01A7BDC6489}|ConsoleGOPS\\ConsoleGOPS.csproj|solutionrelative:consolegops\\mlpaiplayer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{292B6E74-E7B2-47A6-B299-F01A7BDC6489}|ConsoleGOPS\\ConsoleGOPS.csproj|d:\\source\\consolegops\\consolegops\\gops.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{292B6E74-E7B2-47A6-B299-F01A7BDC6489}|ConsoleGOPS\\ConsoleGOPS.csproj|solutionrelative:consolegops\\gops.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{292B6E74-E7B2-47A6-B299-F01A7BDC6489}|ConsoleGOPS\\ConsoleGOPS.csproj|d:\\consolegops\\consolegops\\evolutionarymlpaiplayer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{292B6E74-E7B2-47A6-B299-F01A7BDC6489}|ConsoleGOPS\\ConsoleGOPS.csproj|solutionrelative:consolegops\\evolutionarymlpaiplayer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{292B6E74-E7B2-47A6-B299-F01A7BDC6489}|ConsoleGOPS\\ConsoleGOPS.csproj|d:\\source\\consolegops\\consolegops\\humanplayer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{292B6E74-E7B2-47A6-B299-F01A7BDC6489}|ConsoleGOPS\\ConsoleGOPS.csproj|solutionrelative:consolegops\\humanplayer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -27,40 +27,40 @@
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "EvolutionaryMlpAiPlayer.cs",
-              "DocumentMoniker": "D:\\ConsoleGOPS\\ConsoleGOPS\\EvolutionaryMlpAiPlayer.cs",
-              "RelativeDocumentMoniker": "ConsoleGOPS\\EvolutionaryMlpAiPlayer.cs",
-              "ToolTip": "D:\\ConsoleGOPS\\ConsoleGOPS\\EvolutionaryMlpAiPlayer.cs",
-              "RelativeToolTip": "ConsoleGOPS\\EvolutionaryMlpAiPlayer.cs",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAAAB8AAAAnAAAAAAAAAA==",
+              "Title": "HumanPlayer.cs",
+              "DocumentMoniker": "D:\\source\\ConsoleGOPS\\ConsoleGOPS\\HumanPlayer.cs",
+              "RelativeDocumentMoniker": "ConsoleGOPS\\HumanPlayer.cs",
+              "ToolTip": "D:\\source\\ConsoleGOPS\\ConsoleGOPS\\HumanPlayer.cs",
+              "RelativeToolTip": "ConsoleGOPS\\HumanPlayer.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAA0AAAAkAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-08T16:01:27.009Z",
+              "WhenOpened": "2024-09-12T21:32:48.752Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "MlpAiPlayer.cs",
-              "DocumentMoniker": "D:\\ConsoleGOPS\\ConsoleGOPS\\MlpAiPlayer.cs",
-              "RelativeDocumentMoniker": "ConsoleGOPS\\MlpAiPlayer.cs",
-              "ToolTip": "D:\\ConsoleGOPS\\ConsoleGOPS\\MlpAiPlayer.cs",
-              "RelativeToolTip": "ConsoleGOPS\\MlpAiPlayer.cs",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAAABUAAAAcAAAAAAAAAA==",
+              "Title": "GOPS.cs",
+              "DocumentMoniker": "D:\\source\\ConsoleGOPS\\ConsoleGOPS\\GOPS.cs",
+              "RelativeDocumentMoniker": "ConsoleGOPS\\GOPS.cs",
+              "ToolTip": "D:\\source\\ConsoleGOPS\\ConsoleGOPS\\GOPS.cs",
+              "RelativeToolTip": "ConsoleGOPS\\GOPS.cs",
+              "ViewState": "AgIAAA4AAAAAAAAAAAAjwCgAAAAEAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-08T05:09:14.067Z",
+              "WhenOpened": "2024-09-12T21:32:39.421Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "Population.cs",
-              "DocumentMoniker": "D:\\ConsoleGOPS\\ConsoleGOPS\\Population.cs",
-              "RelativeDocumentMoniker": "ConsoleGOPS\\Population.cs",
-              "ToolTip": "D:\\ConsoleGOPS\\ConsoleGOPS\\Population.cs",
-              "RelativeToolTip": "ConsoleGOPS\\Population.cs",
-              "ViewState": "AgIAAB4AAAAAAAAAAAAowGsAAAAaAAAAAAAAAA==",
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\source\\ConsoleGOPS\\ConsoleGOPS\\Program.cs",
+              "RelativeDocumentMoniker": "ConsoleGOPS\\Program.cs",
+              "ToolTip": "D:\\source\\ConsoleGOPS\\ConsoleGOPS\\Program.cs",
+              "RelativeToolTip": "ConsoleGOPS\\Program.cs",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAAABcAAAAaAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-08T04:27:04.226Z",
+              "WhenOpened": "2024-09-12T21:01:11.763Z",
               "EditorCaption": ""
             }
           ]
