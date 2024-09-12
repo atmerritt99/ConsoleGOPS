@@ -11,7 +11,7 @@ namespace ConsoleGOPS
         public override Card PlaceBet(GOPS gops)
         {
             //Display options to the user
-            Console.WriteLine("Options:");
+            Console.WriteLine("Your Current Hand:");
             for(int i = 0; i < Hand.Count; i++)
             {
                 Console.WriteLine($"{i} - {Hand.Cards[i]}");

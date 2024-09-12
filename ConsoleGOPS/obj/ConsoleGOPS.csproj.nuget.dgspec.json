@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\ConsoleGOPS\\ConsoleGOPS\\ConsoleGOPS.csproj": {}
+    "D:\\source\\ConsoleGOPS\\ConsoleGOPS\\ConsoleGOPS.csproj": {}
   },
   "projects": {
-    "D:\\ConsoleGOPS\\ConsoleGOPS\\ConsoleGOPS.csproj": {
+    "D:\\source\\ConsoleGOPS\\ConsoleGOPS\\ConsoleGOPS.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\ConsoleGOPS\\ConsoleGOPS\\ConsoleGOPS.csproj",
+        "projectUniqueName": "D:\\source\\ConsoleGOPS\\ConsoleGOPS\\ConsoleGOPS.csproj",
         "projectName": "ConsoleGOPS",
-        "projectPath": "D:\\ConsoleGOPS\\ConsoleGOPS\\ConsoleGOPS.csproj",
+        "projectPath": "D:\\source\\ConsoleGOPS\\ConsoleGOPS\\ConsoleGOPS.csproj",
         "packagesPath": "C:\\Users\\austi\\.nuget\\packages\\",
-        "outputPath": "D:\\ConsoleGOPS\\ConsoleGOPS\\obj\\",
+        "outputPath": "D:\\source\\ConsoleGOPS\\ConsoleGOPS\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",

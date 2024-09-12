@@ -35,13 +35,18 @@ namespace ConsoleGOPS
 
         public GOPS(IEnumerable<Player> players)
         {
-            Players = players.ToList();
+            var humanPlayers = players.Where(p => p.GetType() == typeof(HumanPlayer)).ToList();
+
+            if (humanPlayers.Count > 1)
+				throw new Exception($"{humanPlayers.Count} is greater than 1, the maximum number of human players for GOPS"); // For now...
+
+			Players = players.ToList();
 
             if (Players.Count < 2)
-                throw new Exception($"{this.Players.Count} is less than 2, the minimum number of players that can play GOPS");
+                throw new Exception($"{Players.Count} is less than 2, the minimum number of players that can play GOPS");
 
             if (Players.Count > 7)
-                throw new Exception($"{this.Players.Count} is greater than 7, the maximum number of players that can play GOPS");
+                throw new Exception($"{Players.Count} is greater than 7, the maximum number of players that can play GOPS");
 
             //Create each players hand
             var deck = new Deck();
@@ -79,6 +84,7 @@ namespace ConsoleGOPS
 
                 if(display)
                 {
+                    Console.WriteLine();
                     Console.WriteLine("Prizes:");
 
                     foreach (Card prize in Prizes)
@@ -108,7 +114,12 @@ namespace ConsoleGOPS
                 foreach(Card card in cardBids)
                 {
                     if(display)
-                        Console.WriteLine($"Player {playerIdx} bid {card}");
+                    {
+                        string playerName = $"Player {playerIdx + 1}";
+                        if (Players[playerIdx].GetType() == typeof(HumanPlayer))
+                            playerName = "You";
+						Console.WriteLine($"{playerName} bid the {card}");
+					}
 
                     int bid = card.GetCardValue();
 
@@ -126,11 +137,16 @@ namespace ConsoleGOPS
 
                     playerIdx++;
                 }
-                
+
                 if(!isTie)
                 {
                     if(display)
-                        Console.WriteLine($"Player {playerIdxOfMaxBid} won the Prize Cards!");
+                    {
+						string playerName = $"Player {playerIdxOfMaxBid + 1}";
+						if (Players[playerIdxOfMaxBid].GetType() == typeof(HumanPlayer))
+							playerName = "You";
+						Console.WriteLine($"{playerName} won the Prize Cards!");
+					}
                     Players[playerIdxOfMaxBid].CollectedCards.AddCards(Prizes);
                     Prizes.Clear();
                 }
@@ -145,23 +161,48 @@ namespace ConsoleGOPS
             int idx = 0;
             int maxIdx = -1;
             int maxScore = 0;
+            var winners = new List<int>();
             if(display)
                 Console.WriteLine("Final Score Board:");
             foreach (Player player in Players)
             {
                 int score = player.GetCurrentScore();
                 if(display)
-                    Console.WriteLine($"Player {idx} has a score of {score}");
+                {
+					string playerName = $"Player {idx + 1} has";
+					if (Players[idx].GetType() == typeof(HumanPlayer))
+						playerName = "You have";
+					Console.WriteLine($"{playerName} a score of {score}");
+				}
+
+                if(score == maxScore)
+                {
+                    winners.Add(idx);
+                }
+
                 if (score > maxScore)
                 {
-                    maxIdx = idx;
+                    winners.Clear();
+					winners.Add(idx);
+					maxIdx = idx;
                     maxScore = score;
                 }
                 idx++;
             }
 
             if(display)
-                Console.WriteLine($"Player {maxIdx} has the highest score of {maxScore}");
+            {
+                foreach(int playerIdx in winners)
+                {
+					string playerName = $"Player {idx + 1} has";
+					if (Players[playerIdx].GetType() == typeof(HumanPlayer))
+						playerName = "You have";
+					Console.WriteLine($"{playerName} the highest score of {maxScore}!");
+
+                    if (playerIdx < winners.Count - 1)
+                        Console.WriteLine("AND");
+				}
+            }
 
             var temp = new List<Player>(Players.ToArray()).Select(p => p.GetCurrentScore()).ToList();
             temp.Sort();
