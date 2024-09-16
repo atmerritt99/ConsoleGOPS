@@ -157,8 +157,10 @@ namespace ConsoleGOPS
                 }
             }
 
-            //Game has ended, determine winner
-            int idx = 0;
+			Console.WriteLine();
+
+			//Game has ended, determine winner
+			int idx = 0;
             int maxIdx = -1;
             int maxScore = 0;
             var winners = new List<int>();
@@ -190,11 +192,13 @@ namespace ConsoleGOPS
                 idx++;
             }
 
-            if(display)
+			Console.WriteLine();
+
+			if (display)
             {
                 foreach(int playerIdx in winners)
                 {
-					string playerName = $"Player {idx + 1} has";
+					string playerName = $"Player {playerIdx + 1} has";
 					if (Players[playerIdx].GetType() == typeof(HumanPlayer))
 						playerName = "You have";
 					Console.WriteLine($"{playerName} the highest score of {maxScore}!");

@@ -70,26 +70,36 @@ namespace ConsoleGOPS
             var inputs = inputsList.ToArray();
             var outputs = Brain.Predict(inputs);
 
-            float sum = outputs.Sum();
-            var filteredNormalizedOutputs = new List<float>();
+			for (int i = 0; i < outputs.Length; i++)
+			{
+                // Cube the output for better AI selection
+                outputs[i] *= outputs[i];
+				outputs[i] *= outputs[i];
+			}
+
+			float sum = outputs.Sum();
+			var filteredNormalizedOutputs = new List<float>();
 
             for(int i = 0; i < outputs.Length; i++)
             {
                 filteredNormalizedOutputs.Add((outputs[i] * mask[i]) / sum);
             }
 
-            int nnSelection = filteredNormalizedOutputs.IndexOf(filteredNormalizedOutputs.Max()); // Select the max by default
+			int nnSelection = filteredNormalizedOutputs.IndexOf(filteredNormalizedOutputs.Max()); // Select the max by default
 
             //Randomly select a card to bid based on how the cards are weighted
+            //Doing this so that player can play against multiple instances of this model, and the models will all make slightly different picks
             var random = new Random();
             float r = random.NextSingle();
             float previousOutput = 0;
-            for(int i = 0; i < filteredNormalizedOutputs.Count; i++)
+            for (int i = 0; i < filteredNormalizedOutputs.Count; i++)
             {
+                if (filteredNormalizedOutputs[i] == 0)
+                    continue;
+
                 if (r < filteredNormalizedOutputs[i] + previousOutput)
                 {
-                    if(r > 0)
-                        nnSelection = i;
+                    nnSelection = i;
                     break;
                 }
 
