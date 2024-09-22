@@ -28,7 +28,7 @@ namespace ConsoleGOPS
                 match -= pbid.GetCardValue();
             }
             
-            //Select all bids I can make that will match the total or go up to five higher
+            //Select all bids I can make that will match the total or higher
             List<int> choices = new List<int>();
             int idx = -1;
             foreach(Card card in Hand.Cards)

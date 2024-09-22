@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ConsoleGOPS")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+705610e94e9cb3a8a28dfd4aa09d4e7e622ea608")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+89d85ae14869f92d57d76c3b7fb6169c54eff035")]
 [assembly: System.Reflection.AssemblyProductAttribute("ConsoleGOPS")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ConsoleGOPS")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -11,20 +11,16 @@ namespace ConsoleGOPS
     public class MlpAiPlayer : Player
     {
         public NeuralNetwork Brain;
+		private List<Card> _previousBids = new List<Card>();
 
-        private MlpAiPlayer(string path)
+		public MlpAiPlayer(string path)
         {
             Brain = new NeuralNetwork(path);
         }
 
-        public static MlpAiPlayer Create(string path)
+        public MlpAiPlayer(NeuralNetwork brain)
         {
-            return new MlpAiPlayer(path);
-        }
-
-        protected MlpAiPlayer()
-        {
-            Brain = new NeuralNetwork();
+            Brain = brain;
         }
 
         private IEnumerable<float> GetBinaryRepresentationOfHand(Deck hand)
@@ -42,7 +38,24 @@ namespace ConsoleGOPS
 
         public override Card PlaceBet(GOPS gops)
         {
-            var inputsList = new List<float>();
+			// I know the first card in my hand will be the lowest
+			// If I cannot select a better card then play my lowest card
+			int idxOfBid = 0;
+
+			int prizeTotal = gops.GetTotalValueOfPrizes();
+
+			//If only 1 prize card is up for grabs then ignore previous plays
+			if (gops.Prizes.Count == 1)
+				_previousBids.Clear();
+
+			//Determine how much I need to bid to match the prize total evenly
+			int match = prizeTotal;
+			foreach (Card pbid in _previousBids)
+			{
+				match -= pbid.GetCardValue();
+			}
+
+			var inputsList = new List<float>();
 
             var maskList = GetBinaryRepresentationOfHand(Hand);
             var mask = maskList.ToArray();
@@ -70,19 +83,27 @@ namespace ConsoleGOPS
             var inputs = inputsList.ToArray();
             var outputs = Brain.Predict(inputs);
 
-			for (int i = 0; i < outputs.Length; i++)
-			{
-                // Cube the output for better AI selection
-                outputs[i] *= outputs[i];
-				outputs[i] *= outputs[i];
-			}
-
-			float sum = outputs.Sum();
+            float sum = outputs.Sum();
 			var filteredNormalizedOutputs = new List<float>();
 
             for(int i = 0; i < outputs.Length; i++)
             {
-                filteredNormalizedOutputs.Add((outputs[i] * mask[i]) / sum);
+                //If card value is above a reasonable limit, card should not be an option
+                int offset = 2;
+                if (i + 2 > match + offset)
+                {
+                    int x = i + 2 - (match + offset);
+					outputs[i] /= x;
+				}
+
+                int offset2 = 1;
+				if (i + 2 < match - offset2)
+				{
+					int x = match - offset2 - (i + 2);
+					outputs[i] /= x;
+				}
+
+				filteredNormalizedOutputs.Add((outputs[i] * mask[i]) / sum);
             }
 
 			int nnSelection = filteredNormalizedOutputs.IndexOf(filteredNormalizedOutputs.Max()); // Select the max by default
@@ -106,7 +127,16 @@ namespace ConsoleGOPS
                 previousOutput += filteredNormalizedOutputs[i];
             }
 
-            return Hand.SelectCardByValue((Value)(nnSelection + (int)Value.TWO)); //The outputs are length 13 but the values are 2 - 14. Add 2 to account for that.
+            var bid = Hand.SelectCardByValue((Value)(nnSelection + (int)Value.TWO)); //The outputs are length 13 but the values are 2 - 14. Add 2 to account for that.
+
+			if (nnSelection + (int)Value.TWO < match)
+            {
+                bid = Hand.SelectCard(idxOfBid);
+            }
+
+            _previousBids.Add(bid);
+
+            return bid; 
         }
     }
 }

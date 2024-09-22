@@ -1,15 +1,48 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Formats.Asn1.AsnWriter;
 
 namespace ConsoleGOPS
 {
     public class Population
     {
         private List<EvolutionaryMlpAiPlayer> _population;
-        public Population(int populationSize, int[] layers)
+        //private List<EvolutionaryMlpAiPlayer> _bestOverallAis;
+        private EvolutionaryMlpAiPlayer _bestOverallAi;
+
+        private EvolutionaryMlpAiPlayer CopyAI(EvolutionaryMlpAiPlayer player)
+        {
+            return new EvolutionaryMlpAiPlayer(player?.Brain ?? new NeuralNetwork());
+		}
+
+        private async Task PlayGames(int playerCount)
+        {
+            await Task.Run(() =>
+            {
+				for (int i = 0; i < _population.Count; i++)
+				{
+					var players = new List<Player>() { CopyAI(_population[i]) };
+
+                    for(int j = players.Count; j < playerCount; j++)
+                    {
+                        players.Add(CopyAI(_bestOverallAi));
+                    }
+
+                    var gops = new GOPS(players);
+                    gops.Play();
+
+					//Calculate the score
+					var bestScoreExcludingMe = gops.IdxOfWinner == 0 ? gops.Rankings.ToList()[1] : gops.Rankings.ToList()[0];
+					_population[i].Scores[playerCount - 2] = players[0].GetCurrentScore() - bestScoreExcludingMe;
+				}
+			});
+		}
+
+		public Population(int populationSize, int[] layers)
         {
             _population = new List<EvolutionaryMlpAiPlayer>();
 
@@ -17,49 +50,30 @@ namespace ConsoleGOPS
             {
                 _population.Add(new EvolutionaryMlpAiPlayer(layers));
             }
-        }
 
-        public MlpAiPlayer Run(int maxGenNum, int earlyStop, string path)
+            _bestOverallAi = CopyAI(_population[0]);
+		}
+
+        public MlpAiPlayer Run(int maxGenNum, string path)
         {
-            //var bestOverallAi = _population[0];
-            //Initialize the copies
-            var bestOverallAis = new List<EvolutionaryMlpAiPlayer>();
-            for(int i = 0; i < 6; i++)
-            {
-                bestOverallAis.Add(new EvolutionaryMlpAiPlayer(_population[0].Brain));
-            }
-
-            int earlyStopCounter = 0;
             for(int gen = 1; gen <= maxGenNum; gen++)
             {
                 Console.WriteLine($"Generation {gen} / {maxGenNum}");
 
-                for(int playerCount = 2; playerCount <= 7; playerCount++)
-                {
-                    Console.WriteLine($"Playing {playerCount} player games!");
-                    for (int i = 0; i < _population.Count; i++)
-                    {
-                        var players = new List<EvolutionaryMlpAiPlayer>() { _population[i] };
+                Console.WriteLine("Playing Games...");
+                var task1 = PlayGames(2);
+                var task2 = PlayGames(3);
+                var task3 = PlayGames(4);
+                var task4 = PlayGames(5);
+                var task5 = PlayGames(6);
+                var task6 = PlayGames(7);
 
-                        //Initialize Players
-                        for (int j = 0; j < playerCount - 1; j++)
-                        {
-                            players.Add(bestOverallAis[j]);
-                        }
-
-                        var gops = new GOPS(players);
-                        gops.Play();
-
-                        //Calculate the score
-                        var bestScoreExcludingMe = gops.IdxOfWinner == 0 ? gops.Rankings.ToList()[1] : gops.Rankings.ToList()[0];
-                        _population[i].Scores[playerCount - 2] = _population[i].GetCurrentScore() - bestScoreExcludingMe;
-
-                    }
-                }
+                Task.WaitAll(task1, task2, task3, task4, task5, task6);
+                Console.WriteLine("Finished Games");
 
                 //min ensures that the fitness is easier to calculate
                 double min = _population.Select(p => p.Score).Min();
-                if(min <= 0)
+                if (min <= 0)
                 {
                     min *= -1;
                     min++;
@@ -81,15 +95,11 @@ namespace ConsoleGOPS
                 //If the best AI this generattion beat the best overall AI, set the best overall AI to the best AI this generation
                 if (maxScore > 0)
                 {
-                    bestOverallAis.Clear();
-                    for (int i = 0; i < 6; i++)
-                    {
-                        bestOverallAis.Add(new EvolutionaryMlpAiPlayer(bestGenerationsAi?.Brain ?? new NeuralNetwork()));
-                    }
-                    earlyStopCounter = 0;
+                    _bestOverallAi = CopyAI(bestGenerationsAi ?? new EvolutionaryMlpAiPlayer());
+                    _bestOverallAi.Brain.Save(path);
                 }
 
-                Console.WriteLine($"Best Score this Generation: {maxScore}");
+				Console.WriteLine($"Best Score this Generation: {maxScore}");
 
                 //Asexual Reproduction and Mutation
                 var newPopulation = new List<EvolutionaryMlpAiPlayer>();
@@ -100,18 +110,13 @@ namespace ConsoleGOPS
 
                 //Update Population
                 _population = newPopulation;
-                earlyStopCounter++;
 
-                if (earlyStopCounter >= earlyStop)
-                {
-                    Console.WriteLine($"No improvements after {earlyStop} generations. Stopping training.");
-                    break;
-                }
                 Console.WriteLine();
             }
 
-            bestOverallAis[0].Brain.Save(path);
-            var mlp = MlpAiPlayer.Create(path);
+            //_bestOverallAis[0].Brain.Save(path);
+            _bestOverallAi.Brain.Save(path);
+            var mlp = new MlpAiPlayer(path);
             return mlp;
         }
 
