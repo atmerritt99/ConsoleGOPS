@@ -16,7 +16,7 @@ namespace ConsoleGOPS
         /// </summary>
         public List<Card> Prizes { get; }
 
-        public List<Player> Players { get; }
+        public List<Player> Players { get; private set; }
         public int IdxOfWinner { get; private set; }
 
         public IEnumerable<int> Rankings { get; private set; }
@@ -71,6 +71,93 @@ namespace ConsoleGOPS
             Rankings = new List<int>();
         }
 
+        private void PlayTurn(bool display = false)
+        {
+			//Display Prize Cards
+			Prizes.Add(_prizeDeck.Draw());
+
+			if (display)
+			{
+				Console.WriteLine();
+				Console.WriteLine("Prizes:");
+
+				foreach (Card prize in Prizes)
+				{
+					Console.WriteLine(prize.ToString());
+				}
+			}
+
+			//Players place bids
+			List<Card> cardBids = new List<Card>();
+			foreach (var player in Players)
+			{
+				cardBids.Add(player.PlaceBet(this));
+			}
+
+			//Remove cards only AFTER players select their cards
+			int playerCounter = 0;
+			foreach (var player in Players)
+			{
+				player.Hand.RemoveCard(cardBids[playerCounter]);
+				playerCounter++;
+			}
+
+			//Calculate who won the bid
+			//Also Display all of the bids
+			int maxBid = 0;
+			int playerIdxOfMaxBid = -1;
+			bool isTie = false;
+			int playerIdx = 0;
+
+			if (display)
+				Console.WriteLine("Bids:");
+
+			foreach (Card card in cardBids)
+			{
+				if (display)
+				{
+					string playerName = $"Player {playerIdx + 1}";
+					if (Players[playerIdx].GetType() == typeof(HumanPlayer))
+						playerName = "You";
+					Console.WriteLine($"{playerName} bid the {card}");
+				}
+
+				int bid = card.GetCardValue();
+
+				if (bid == maxBid)
+				{
+					isTie = true;
+				}
+
+				if (bid > maxBid)
+				{
+					isTie = false;
+					maxBid = bid;
+					playerIdxOfMaxBid = playerIdx;
+				}
+
+				playerIdx++;
+			}
+
+			if (!isTie)
+			{
+				if (display)
+				{
+					string playerName = $"Player {playerIdxOfMaxBid + 1}";
+					if (Players[playerIdxOfMaxBid].GetType() == typeof(HumanPlayer))
+						playerName = "You";
+					Console.WriteLine($"{playerName} won the Prize Cards!");
+				}
+				Players[playerIdxOfMaxBid].CollectedCards.AddCards(Prizes);
+				Prizes.Clear();
+			}
+			else
+			{
+				if (display)
+					Console.WriteLine("There was a tie!");
+			}
+		}
+
         /// <summary>
         /// Plays the game of GOPS
         /// </summary>
@@ -79,85 +166,11 @@ namespace ConsoleGOPS
         {
             while(!_prizeDeck.IsEmpty)
             {
-                //Display Prize Cards
-                Prizes.Add(_prizeDeck.Draw());
-
-                if(display)
-                {
-                    Console.WriteLine();
-                    Console.WriteLine("Prizes:");
-
-                    foreach (Card prize in Prizes)
-                    {
-                        Console.WriteLine(prize.ToString());
-                    }
-                }
-
-
-                //Players place bids
-                List<Card> cardBids = new List<Card>();
-                foreach (Player player in Players)
-                {
-                    cardBids.Add(player.PlaceBet(this));
-                }
-
-                //Calculate who won the bid
-                //Also Display all of the bids
-                int maxBid = 0;
-                int playerIdxOfMaxBid = -1;
-                bool isTie = false;
-                int playerIdx = 0;
-
-                if(display)
-                    Console.WriteLine("Bids:");
-
-                foreach(Card card in cardBids)
-                {
-                    if(display)
-                    {
-                        string playerName = $"Player {playerIdx + 1}";
-                        if (Players[playerIdx].GetType() == typeof(HumanPlayer))
-                            playerName = "You";
-						Console.WriteLine($"{playerName} bid the {card}");
-					}
-
-                    int bid = card.GetCardValue();
-
-                    if (bid == maxBid)
-                    {
-                        isTie = true;
-                    }
-
-                    if (bid > maxBid)
-                    {
-                        isTie = false;
-                        maxBid = bid;
-                        playerIdxOfMaxBid = playerIdx;
-                    }
-
-                    playerIdx++;
-                }
-
-                if(!isTie)
-                {
-                    if(display)
-                    {
-						string playerName = $"Player {playerIdxOfMaxBid + 1}";
-						if (Players[playerIdxOfMaxBid].GetType() == typeof(HumanPlayer))
-							playerName = "You";
-						Console.WriteLine($"{playerName} won the Prize Cards!");
-					}
-                    Players[playerIdxOfMaxBid].CollectedCards.AddCards(Prizes);
-                    Prizes.Clear();
-                }
-                else
-                {
-                    if(display)
-                        Console.WriteLine("There was a tie!");
-                }
+                PlayTurn(display);
             }
 
-			Console.WriteLine();
+            if(display)
+			    Console.WriteLine();
 
 			//Game has ended, determine winner
 			int idx = 0;
@@ -192,7 +205,8 @@ namespace ConsoleGOPS
                 idx++;
             }
 
-			Console.WriteLine();
+            if(display)
+			    Console.WriteLine();
 
 			if (display)
             {

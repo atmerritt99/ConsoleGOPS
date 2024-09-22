@@ -77,10 +77,14 @@ namespace ConsoleGOPS
             Cards.Insert(0, card);
         }
 
-        public Card SelectCard(int idxOfCard)
+		public void RemoveCard(Card card)
+		{
+			Cards.Remove(card);
+		}
+
+		public Card SelectCard(int idxOfCard)
         {
             Card selectedCard = Cards[idxOfCard];
-            Cards.RemoveAt(idxOfCard);
             return selectedCard;
         }
 
